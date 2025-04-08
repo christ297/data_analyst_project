@@ -1,0 +1,39 @@
+@startuml
+entity Produits {
+  + id : INT <<PK>>
+  --
+  nom : VARCHAR
+  categorie : VARCHAR
+  prix_unitaire : DECIMAL
+  stock_disponible : INT
+}
+
+entity Clients {
+  + id : INT <<PK>>
+  --
+  nom : VARCHAR
+  email : VARCHAR
+  telephone : VARCHAR
+  adresse : TEXT
+}
+
+entity Ventes {
+  + id : INT <<PK>>
+  --
+  client_id : INT <<FK>>
+  date_vente : DATETIME
+}
+
+entity Details_Ventes {
+  + id : INT <<PK>>
+  --
+  vente_id : INT <<FK>>
+  produit_id : INT <<FK>>
+  quantite : INT
+  montant_total : DECIMAL
+}
+
+Produits ||--o{ Details_Ventes : contient
+Clients ||--o{ Ventes : effectue
+Ventes ||--o{ Details_Ventes : inclut
+@enduml comment executer puml dans jupiter notebook
